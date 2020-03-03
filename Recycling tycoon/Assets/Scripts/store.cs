@@ -6,22 +6,55 @@ public class store : MonoBehaviour
 {
     float CurrentBalance;
     float BaseStoreCost;
+    float BaseStoreProfit;
+
     int StoreCount;
+    public Text CostText;
     public Text StoreCountText;
     public Text CurrentBalanceText;
+    public Text AmountGenText;
+    public Slider ProgressSlider;
+    public float multiplier = 1.5f;
+    public int upgradeCount = 1;
+    public float totalValue;
+    float StoreTimer = 4f;
+    float CurrentTimer = 0;
+    bool StartTimer;
 
     void Start()
     {
         StoreCount = 1;
         CurrentBalance = 2.0f;
         BaseStoreCost = 1.50f;
+        BaseStoreProfit = .50f;
         CurrentBalanceText.text = CurrentBalance.ToString("C2");
+        CostText.text = BaseStoreCost.ToString("C2");
+        AmountGenText.text = BaseStoreProfit.ToString("C2");
+        StartTimer = false;
+        totalValue = BaseStoreProfit;
     }
 
    
     void Update()
     {
-        
+
+        if (StartTimer)
+        {
+            CurrentTimer += Time.deltaTime;
+            if (CurrentTimer > StoreTimer)
+            {
+                Debug.Log("Timer has ended. Reset.");
+                StartTimer = false;
+                CurrentTimer = 0f;
+                CurrentBalance += totalValue;
+                CurrentBalanceText.text = CurrentBalance.ToString("C2");
+                //AmountGenText.text = BaseStoreProfit.ToString("C2");
+            }
+            
+        }
+
+        ProgressSlider.value = CurrentTimer / StoreTimer;
+
     }
 
     public void BuyStoreOnClick ()
@@ -34,7 +67,28 @@ public class store : MonoBehaviour
         CurrentBalance = CurrentBalance - BaseStoreCost;
         Debug.Log(CurrentBalance);
         CurrentBalanceText.text = CurrentBalance.ToString("C2");
+        BaseStoreCost *= multiplier;
+
+        // BaseStoreProfit *= StoreCount;
+
+        totalValue = BaseStoreProfit * StoreCount;
+
+        CostText.text = BaseStoreCost.ToString("C2");
+        AmountGenText.text = totalValue.ToString("C2");
     }
+
+
+    public void StoreOnClick()
+    {
+        Debug.Log("Clicked on store");
+        if (!StartTimer)
+            StartTimer = true;
+
+
+
+    }
+
+
 
 
 }
