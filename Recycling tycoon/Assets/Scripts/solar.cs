@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class store : MonoBehaviour
+public class solar : MonoBehaviour
 {
     float CurrentBalance;
     float BaseStoreCost;
@@ -16,19 +16,19 @@ public class store : MonoBehaviour
     public Text CurrentBalanceText;
     public Text AmountGenText;
     public Slider ProgressSlider;
-    public float multiplier = 1.3f;
-    public int upgradeCount = 1;
+    public float multiplier = 1.45f;
+    public int upgradeCount = 0;
     public float totalValue;
-    float StoreTimer = 2f;
+    float StoreTimer = 20f;
     float CurrentTimer = 0;
     bool StartTimer;
 
     void Start()
     {
-        StoreCount = 1;
+        StoreCount = 0;
         CurrentBalance = 2.0f;
-        BaseStoreCost = 1.50f;
-        BaseStoreProfit = .50f;
+        BaseStoreCost = 100.00f;
+        BaseStoreProfit = 9.50f;
         CostText.text = BaseStoreCost.ToString("C2");
         AmountGenText.text = BaseStoreProfit.ToString("C2");
         StartTimer = false;
@@ -36,9 +36,11 @@ public class store : MonoBehaviour
         mh = FindObjectOfType<MoneyHandler>();
     }
 
-   
+
     void Update()
     {
+        if (!StartTimer && StoreCount > 0)
+            StartTimer = true;
 
         if (StartTimer)
         {
@@ -49,16 +51,15 @@ public class store : MonoBehaviour
                 StartTimer = false;
                 CurrentTimer = 0f;
                 mh.totalMoney += totalValue;
-                //AmountGenText.text = BaseStoreProfit.ToString("C2");
             }
-            
+
         }
 
         ProgressSlider.value = CurrentTimer / StoreTimer;
 
     }
 
-    public void BuyStoreOnClick ()
+    public void BuyStoreOnClick()
     {
         if (BaseStoreCost > mh.totalMoney)
             return;
