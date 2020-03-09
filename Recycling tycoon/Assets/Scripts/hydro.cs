@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class solar : MonoBehaviour
+public class hydro : MonoBehaviour
 {
     float CurrentBalance;
     float BaseStoreCost;
@@ -20,16 +20,16 @@ public class solar : MonoBehaviour
     public float multiplier = 1.35f;
     public int upgradeCount = 0;
     public float totalValue;
-    float StoreTimer = 20f;
+    float StoreTimer = 90f;
     float CurrentTimer = 0;
     bool StartTimer;
-
+    
     void Start()
     {
         StoreCount = 0;
         CurrentBalance = 2.0f;
-        BaseStoreCost = 100.00f;
-        BaseStoreProfit = 25.25f;
+        BaseStoreCost = 15000f;
+        BaseStoreProfit = 1575.50f;
         CostText.text = BaseStoreCost.ToString("C2");
         AmountGenText.text = BaseStoreProfit.ToString("C2");
         StartTimer = false;

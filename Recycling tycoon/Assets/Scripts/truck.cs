@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ public class truck : MonoBehaviour
     float CurrentBalance;
     float BaseStoreCost;
     float BaseStoreProfit;
-
+    public Text texttimer;
     MoneyHandler mh;
 
     int StoreCount;
@@ -16,7 +17,7 @@ public class truck : MonoBehaviour
     public Text CurrentBalanceText;
     public Text AmountGenText;
     public Slider ProgressSlider;
-    public float multiplier = 1.2f;
+    public float multiplier = 1.35f;
     public int upgradeCount = 0;
     public float totalValue;
     float StoreTimer = 8f;
@@ -28,7 +29,7 @@ public class truck : MonoBehaviour
         StoreCount = 0;
         CurrentBalance = 2.0f;
         BaseStoreCost = 20.00f;
-        BaseStoreProfit = 4.50f;
+        BaseStoreProfit = 9.50f;
         CostText.text = BaseStoreCost.ToString("C2");
         AmountGenText.text = BaseStoreProfit.ToString("C2");
         StartTimer = false;
@@ -45,6 +46,7 @@ public class truck : MonoBehaviour
         if (StartTimer)
         {
             CurrentTimer += Time.deltaTime;
+            texttimer.text = Math.Round(StoreTimer - CurrentTimer).ToString();
             if (CurrentTimer > StoreTimer)
             {
                 Debug.Log("Timer has ended. Reset.");

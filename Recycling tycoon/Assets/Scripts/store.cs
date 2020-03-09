@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ public class store : MonoBehaviour
     float CurrentBalance;
     float BaseStoreCost;
     float BaseStoreProfit;
-
+    public Text texttimer;
     MoneyHandler mh;
 
     int StoreCount;
@@ -16,7 +17,7 @@ public class store : MonoBehaviour
     public Text CurrentBalanceText;
     public Text AmountGenText;
     public Slider ProgressSlider;
-    public float multiplier = 1.3f;
+    public float multiplier = 1.35f;
     public int upgradeCount = 1;
     public float totalValue;
     float StoreTimer = 2f;
@@ -43,6 +44,7 @@ public class store : MonoBehaviour
         if (StartTimer)
         {
             CurrentTimer += Time.deltaTime;
+            texttimer.text = Math.Round(StoreTimer - CurrentTimer).ToString();
             if (CurrentTimer > StoreTimer)
             {
                 Debug.Log("Timer has ended. Reset.");
