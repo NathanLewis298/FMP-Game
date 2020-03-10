@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class MoneyHandler : MonoBehaviour
 {
     public float totalMoney = 2f;
+    public Store store;
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Text>().text = totalMoney.ToString("C2");
+        store.DisplayPrices(gameObject.GetComponent<Text>(), totalMoney);
     }
 }

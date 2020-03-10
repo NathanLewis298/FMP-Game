@@ -3,86 +3,108 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class store : MonoBehaviour
+public class Store : MonoBehaviour
 {
-    float CurrentBalance;
-    float BaseStoreCost;
-    float BaseStoreProfit;
-    public Text texttimer;
-    MoneyHandler mh;
+    float currentTimer = 0;
+    bool startTimer;
+    float currentBalance;
 
-    int StoreCount;
-    public Text CostText;
+    MoneyHandler moneyHandler;
+
+    public float baseStoreProfit;
+    public float StoreTimer = 2f;
+    public int ownedStores = 0;
+    public float baseStoreCost;
+    public bool loopAfterpurchase = true;
+
+    public Text texttimer;
+    public Text costText;
     public Text StoreCountText;
     public Text CurrentBalanceText;
-    public Text AmountGenText;
+    public Text amountGenText;
     public Slider ProgressSlider;
     public float multiplier = 1.35f;
     public int upgradeCount = 1;
     public float totalValue;
-    float StoreTimer = 2f;
-    float CurrentTimer = 0;
-    bool StartTimer;
+
 
     void Start()
     {
-        StoreCount = 1;
-        CurrentBalance = 2.0f;
-        BaseStoreCost = 1.50f;
-        BaseStoreProfit = .50f;
-        CostText.text = BaseStoreCost.ToString("C2");
-        AmountGenText.text = BaseStoreProfit.ToString("C2");
-        StartTimer = false;
-        totalValue = BaseStoreProfit;
-        mh = FindObjectOfType<MoneyHandler>();
+        costText.text = baseStoreCost.ToString("C2");
+        amountGenText.text = baseStoreProfit.ToString("C2");
+        startTimer = false;
+        totalValue = baseStoreProfit;
+        moneyHandler = FindObjectOfType<MoneyHandler>();
+
+        DisplayPrices(costText, baseStoreCost);
+        DisplayPrices(amountGenText, baseStoreProfit);
     }
 
-   
     void Update()
     {
+        if (loopAfterpurchase && (!startTimer && ownedStores > 0))
+            startTimer = true;
 
-        if (StartTimer)
+        if (startTimer)
         {
-            CurrentTimer += Time.deltaTime;
-            texttimer.text = Math.Round(StoreTimer - CurrentTimer).ToString();
-            if (CurrentTimer > StoreTimer)
+            currentTimer += Time.deltaTime;
+            texttimer.text = Math.Round(StoreTimer - currentTimer).ToString();
+            if (currentTimer > StoreTimer)
             {
                 Debug.Log("Timer has ended. Reset.");
-                StartTimer = false;
-                CurrentTimer = 0f;
-                mh.totalMoney += totalValue;
-                //AmountGenText.text = BaseStoreProfit.ToString("C2");
+                startTimer = false;
+                currentTimer = 0f;
+                moneyHandler.totalMoney += totalValue;
             }
-            
+
         }
 
-        ProgressSlider.value = CurrentTimer / StoreTimer;
+        ProgressSlider.value = currentTimer / StoreTimer;
 
     }
 
-    public void BuyStoreOnClick ()
+    public void BuyStoreOnClick()
     {
-        if (BaseStoreCost > mh.totalMoney)
+        if (baseStoreCost > moneyHandler.totalMoney)
             return;
-        StoreCount = StoreCount + 1;
-        Debug.Log(StoreCount);
-        StoreCountText.text = StoreCount.ToString();
-        mh.totalMoney -= BaseStoreCost;
-        Debug.Log(CurrentBalance);
-        BaseStoreCost *= multiplier;
+        ownedStores = ownedStores + 1;
+        Debug.Log(ownedStores);
+        StoreCountText.text = ownedStores.ToString();
+        moneyHandler.totalMoney -= baseStoreCost;
+        Debug.Log(currentBalance);
+        baseStoreCost *= multiplier;
 
-        // BaseStoreProfit *= StoreCount;
+        totalValue = baseStoreProfit * ownedStores;
 
-        totalValue = BaseStoreProfit * StoreCount;
-
-        CostText.text = BaseStoreCost.ToString("C2");
-        AmountGenText.text = totalValue.ToString("C2");
+        DisplayPrices(costText, baseStoreCost);
+        DisplayPrices(amountGenText, totalValue);
     }
 
-    public void StoreOnClick()
+    public void ClickToGenerateMoney()
     {
         Debug.Log("Clicked on store");
-        if (!StartTimer)
-            StartTimer = true;
+        if (!startTimer)
+            startTimer = true;
     }
+
+    public void DisplayPrices(Text text, float money)
+    {
+        text.text = money.ToString("C2");
+
+        if (money / 1000 >= 1)
+        {
+            text.text = "£" + Math.Round(money / 1000, 3).ToString() + "K";
+        }
+        if (money / 1000000 >= 1)
+        {
+            text.text = "£" + Math.Round(money / 1000000, 3).ToString() + "M";
+        }
+
+        if (money / 1000000000 >= 1)
+        {
+            text.text = "£" + Math.Round(money / 1000000000, 3).ToString() + "B";
+        }
+
+    }
+
 }
