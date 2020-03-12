@@ -26,7 +26,8 @@ public class Store : MonoBehaviour
     public float multiplier = 1.35f;
     public int upgradeCount = 1;
     public float totalValue;
-
+    public AudioSource cashOne;
+    public int generateTone;
 
     void Start()
     {
@@ -64,10 +65,17 @@ public class Store : MonoBehaviour
     }
 
     public void BuyStoreOnClick()
+        
     {
+        generateTone = UnityEngine.Random.Range(1,1);
         if (baseStoreCost > moneyHandler.totalMoney)
             return;
         ownedStores = ownedStores + 1;
+        if (generateTone == 1)
+        {
+            cashOne.Play();
+
+        }
         Debug.Log(ownedStores);
         StoreCountText.text = ownedStores.ToString();
         moneyHandler.totalMoney -= baseStoreCost;
