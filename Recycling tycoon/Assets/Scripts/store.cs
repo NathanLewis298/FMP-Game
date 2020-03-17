@@ -52,7 +52,7 @@ public class Store : MonoBehaviour
             texttimer.text = Math.Round(StoreTimer - currentTimer).ToString();
             if (currentTimer > StoreTimer)
             {
-                Debug.Log("Timer has ended. Reset.");
+                //Debug.Log("Timer has ended. Reset.");
                 startTimer = false;
                 currentTimer = 0f;
                 moneyHandler.totalMoney += totalValue;
@@ -76,10 +76,10 @@ public class Store : MonoBehaviour
             cashOne.Play();
 
         }
-        Debug.Log(ownedStores);
+        //Debug.Log(ownedStores);
         StoreCountText.text = ownedStores.ToString();
         moneyHandler.totalMoney -= baseStoreCost;
-        Debug.Log(currentBalance);
+        //Debug.Log(currentBalance);
         baseStoreCost *= multiplier;
 
         totalValue = baseStoreProfit * ownedStores;
@@ -90,7 +90,7 @@ public class Store : MonoBehaviour
 
     public void ClickToGenerateMoney()
     {
-        Debug.Log("Clicked on store");
+        //Debug.Log("Clicked on store");
         if (!startTimer)
             startTimer = true;
     }

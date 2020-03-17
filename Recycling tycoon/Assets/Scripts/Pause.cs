@@ -28,14 +28,12 @@ public class Pause : MonoBehaviour
             DeactivateMenu();
         }
 
-
-
-
     }
 
-    void ActivateMenu()
+   public void ActivateMenu()
     {
         pauseMenuUI.SetActive(true);
+        isPaused = true;
     }
 
     public void DeactivateMenu()
@@ -44,8 +42,7 @@ public class Pause : MonoBehaviour
         isPaused = false;
     }
 
-
-
+   
     public void Return()
     {
         SceneManager.LoadScene(mainMenuScene);

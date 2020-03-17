@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class UpgradeShop : MonoBehaviour
 {
     public Store storeToUpgrade;
@@ -9,6 +9,8 @@ public class UpgradeShop : MonoBehaviour
     public int[] numberOfUpgrades = { 2, 3, 4, 5 };
     public float[] upgradeCost = new float[4];
 
+    public Text upgradeCostText;
+    public Text multiplierText;
     public float startCost = 500f;
     public float costMultiplier = 3f;
 
@@ -28,6 +30,9 @@ public class UpgradeShop : MonoBehaviour
             }
 
         }
+        multiplierText.text = "X" + numberOfUpgrades[curentUpgrade].ToString();
+
+        storeToUpgrade.DisplayPrices(upgradeCostText, upgradeCost[curentUpgrade]);
     }
 
     public void Upgrade()
@@ -39,6 +44,14 @@ public class UpgradeShop : MonoBehaviour
             moneyHandler.totalMoney -= upgradeCost[curentUpgrade];
             storeToUpgrade.DisplayPrices(storeToUpgrade.amountGenText, storeToUpgrade.totalValue);
             curentUpgrade++;
+
+            if (curentUpgrade < numberOfUpgrades.Length)
+            {
+                multiplierText.text = "X" + numberOfUpgrades[curentUpgrade].ToString();
+                storeToUpgrade.DisplayPrices(upgradeCostText, upgradeCost[curentUpgrade]);
+            }
+            else
+                multiplierText.text = "MAXED";
         }
     }
 }
