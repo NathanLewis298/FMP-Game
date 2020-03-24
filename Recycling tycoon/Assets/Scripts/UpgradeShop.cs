@@ -8,7 +8,8 @@ public class UpgradeShop : MonoBehaviour
     public MoneyHandler moneyHandler;
     public int[] numberOfUpgrades = { 2, 3, 4, 5 };
     public float[] upgradeCost = new float[4];
-
+    public int generateTone;
+    public AudioSource upgradeSound;
     public Text upgradeCostText;
     public Text multiplierText;
     public float startCost = 500f;
@@ -37,6 +38,8 @@ public class UpgradeShop : MonoBehaviour
 
     public void Upgrade()
     {
+        generateTone = UnityEngine.Random.Range(1, 1);
+
         if (moneyHandler.totalMoney >= upgradeCost[curentUpgrade])
         {
             storeToUpgrade.totalValue *= numberOfUpgrades[curentUpgrade];
@@ -44,6 +47,14 @@ public class UpgradeShop : MonoBehaviour
             moneyHandler.totalMoney -= upgradeCost[curentUpgrade];
             storeToUpgrade.DisplayPrices(storeToUpgrade.amountGenText, storeToUpgrade.totalValue);
             curentUpgrade++;
+
+            if (generateTone == 1)
+            {
+                upgradeSound.Play();
+
+            }
+
+
 
             if (curentUpgrade < numberOfUpgrades.Length)
             {
