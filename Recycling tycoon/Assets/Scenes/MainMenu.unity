@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad54147504bc3741901a39c4ad0f744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tycoon: Tycoon
+  Tycoon: Story
 --- !u!4 &1612356748
 Transform:
   m_ObjectHideFlags: 0

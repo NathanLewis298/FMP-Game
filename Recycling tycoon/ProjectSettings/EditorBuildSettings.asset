@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 2128e013beebbd64587a526570a455de
   - enabled: 1
+    path: Assets/Scenes/Story.unity
+    guid: 98cf0e9d8a1b7fd4386a93f6640b1ee0
+  - enabled: 1
     path: Assets/Scenes/Tycoon.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
