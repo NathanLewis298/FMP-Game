@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
-
+    public static bool isLoading = false;
     public string Tycoon;
     public void NewGame()
     {
@@ -16,6 +16,10 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-
+    public void LoadGame()
+    {
+        isLoading = true;
+        SceneManager.LoadScene(2);
+    }
 }
 

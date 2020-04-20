@@ -15,7 +15,7 @@ public class UpgradeShop : MonoBehaviour
     public float startCost = 500f;
     public float costMultiplier = 3f;
 
-    int curentUpgrade = 0;
+    public int curentUpgrade = 0;
 
     private void Start()
     {
