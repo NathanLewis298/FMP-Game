@@ -2639,7 +2639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c18bd5624e859c4c83bac9a946217b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusSpawn: {fileID: 4176407229833217627, guid: 56330e9bdaa51964db2d0a070b17a645,
+  bonusSpawn: {fileID: 4176407229833217627, guid: 4863a0c11efd99f418ce4c3ee954ec4a,
     type: 3}
   bonusSpawnTime: 5
   canvas: {fileID: 486067994}
