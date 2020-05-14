@@ -28,6 +28,7 @@ public class Store : MonoBehaviour
     public float totalValue;
     public AudioSource cashOne;
     public int generateTone;
+    public Button colourGreen;
 
     void Start()
     {
@@ -61,6 +62,19 @@ public class Store : MonoBehaviour
         }
 
         ProgressSlider.value = currentTimer / StoreTimer;
+            
+        if (moneyHandler.totalMoney >= baseStoreCost)
+        {
+            ColorBlock colors = colourGreen.colors;
+            colors.normalColor = Color.green;
+            colourGreen.colors = colors;
+        }
+        else
+        {
+            ColorBlock colors = colourGreen.colors;
+            colors.normalColor = Color.red;
+            colourGreen.colors = colors;
+        }
 
     }
 

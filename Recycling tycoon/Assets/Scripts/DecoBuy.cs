@@ -10,6 +10,7 @@ public class DecoBuy : MonoBehaviour
     public GameObject[] itemToBuy;
     public int currentDeco = 0;
     public MoneyHandler moneyHandler;
+    public bool gameOver = false;
     public void BuyDeco()
     {
 
@@ -35,6 +36,7 @@ public class DecoBuy : MonoBehaviour
 
        if(currentDeco == itemToBuy.Length)
         {
+            gameOver = true;
             this.gameObject.SetActive(false);
         }
 
